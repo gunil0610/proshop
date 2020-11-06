@@ -22,6 +22,8 @@
     "start": "node backend/server",
     "server": "nodemon backend/server",
     "client": "cd frontend && yarn start",
-    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "data:import": "node backend/seeder",
+    "data:destroy": "node backend/seeder -d"
   }
 }
