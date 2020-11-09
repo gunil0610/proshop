@@ -13,7 +13,7 @@ import {
 
 import Message from "../components/Message";
 
-import { addToCart } from "../redux/cart/cart.actions";
+import { addToCart, removeFromCart } from "../redux/cart/cart.actions";
 
 const CartScreen = ({ match, location, history }) => {
   const productId = match.params.id;
@@ -32,7 +32,7 @@ const CartScreen = ({ match, location, history }) => {
   }, [dispatch, productId, qty]);
 
   const removeFromCartHandler = (id) => {
-    console.log("remove");
+    dispatch(removeFromCart(id));
   };
 
   const checkoutHandler = () => {
