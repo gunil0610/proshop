@@ -117,7 +117,6 @@ const CartScreen = ({ match, location, history }) => {
           </ListGroup>
         </Card>
       </Col>
-      <Col md={2}></Col>
     </Row>
   );
 };
