@@ -15,14 +15,14 @@ const ProfileScreen = ({ history, location }) => {
 
   const dispatch = useDispatch();
 
-  const userLogin = useSelector((state) => state.user);
-  const { loading, error, userInfo, success } = userLogin;
+  const user = useSelector((state) => state.user);
+  const { loading, error, userInfo, success } = user;
 
   useEffect(() => {
     if (!userInfo) {
       history.push("/login");
     } else {
-      if (!userInfo.name) {
+      if (!userInfo || !userInfo.name || success) {
         dispatch(getUserDetails("profile"));
       } else {
         setName(userInfo.name);
