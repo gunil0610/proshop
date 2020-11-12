@@ -7,6 +7,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
     case UserActionType.USER_LOGIN_REQUEST:
     case UserActionType.USER_REGISTER_REQUEST:
     case UserActionType.USER_DETAILS_REQUEST:
+    case UserActionType.USER_UPDATE_PROFILE_REQUEST:
       return {
         ...state,
         loading: true,
@@ -18,10 +19,16 @@ const userReducer = (state = INITIAL_STATE, action) => {
         loading: false,
         userInfo: action.payload,
       };
-
+    case UserActionType.USER_UPDATE_PROFILE_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        userInfo: action.payload,
+      };
     case UserActionType.USER_LOGIN_FAIL:
     case UserActionType.USER_REGISTER_FAIL:
     case UserActionType.USER_DETAILS_FAIL:
+    case UserActionType.USER_UPDATE_PROFILE_FAIL:
       return {
         loading: false,
         error: action.payload,
