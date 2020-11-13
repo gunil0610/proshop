@@ -4,12 +4,14 @@ import productListReducer from "./productList/productList.reducer";
 import productDetailsReducer from "./productDetails/productDetails.reducer";
 import cartReducer from "./cart/cart.reducer";
 import userReducer from "./user/user.reducer";
+import orderReducer from "./order/order.reducer";
 
 const rootReducer = combineReducers({
   productList: productListReducer,
   productDetails: productDetailsReducer,
   cart: cartReducer,
   user: userReducer,
+  order: orderReducer,
 });
 
 export default rootReducer;
