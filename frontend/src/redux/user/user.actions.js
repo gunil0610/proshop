@@ -1,6 +1,7 @@
 import axios from "axios";
 
 import UserActionTypes from "./user.types";
+import OrderActionTypes from "../order/order.types";
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -40,6 +41,7 @@ export const login = (email, password) => async (dispatch) => {
 export const logout = () => (dispatch) => {
   localStorage.removeItem("userInfo");
   dispatch({ type: UserActionTypes.USER_LOGOUT });
+  dispatch({ type: OrderActionTypes.ORDER_LIST_MY_RESET });
 };
 
 export const register = (name, email, password) => async (dispatch) => {
