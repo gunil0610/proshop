@@ -15,6 +15,7 @@ const UserActionTypes = {
   USER_LIST_REQUEST: "USER_LIST_REQUEST",
   USER_LIST_SUCCESS: "USER_LIST_SUCCESS",
   USER_LIST_FAIL: "USER_LIST_FAIL",
+  USER_LIST_RESET: "USER_LIST_RESET",
 };
 
 export default UserActionTypes;
