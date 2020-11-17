@@ -187,3 +187,35 @@ export const listUsers = () => async (dispatch, getState) => {
     });
   }
 };
+
+export const deleteUser = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: UserActionTypes.USER_DELETE_REQUEST,
+    });
+
+    const {
+      user: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+    // eslint-disable-next-line
+    const { data } = await axios.delete(`/api/users/${id}`, config);
+
+    dispatch({
+      type: UserActionTypes.USER_DELETE_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({
+      type: UserActionTypes.USER_DELETE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
