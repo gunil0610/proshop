@@ -17,26 +17,26 @@ const ProfileScreen = ({ history, location }) => {
 
   const dispatch = useDispatch();
 
-  const user = useSelector((state) => state.user);
-  const { loading, error, userInfo, success } = user;
+  const userDetails = useSelector((state) => state.userDetails);
+  const { loading, error, user, success } = userDetails;
 
   const orderListMy = useSelector((state) => state.orderListMy);
   const { loading: loadingOrders, error: errorOrders, orders } = orderListMy;
 
   useEffect(() => {
-    if (!userInfo) {
+    if (!user) {
       history.push("/login");
     } else {
-      if (!userInfo || !userInfo.name || success) {
+      if (!user || !user.name || success) {
         dispatch(getUserDetails("profile"));
         dispatch(listMyOrders());
       } else {
-        setName(userInfo.name);
-        setEmail(userInfo.email);
+        setName(user.name);
+        setEmail(user.email);
         dispatch(listMyOrders());
       }
     }
-  }, [dispatch, history, userInfo, success]);
+  }, [dispatch, history, user, success]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -44,7 +44,7 @@ const ProfileScreen = ({ history, location }) => {
       setMessage("Passwords do not match");
     } else {
       setMessage(null);
-      dispatch(updateUserProfile({ id: userInfo._id, name, email, password }));
+      dispatch(updateUserProfile({ id: user._id, name, email, password }));
     }
   };
 

@@ -6,7 +6,6 @@ const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case UserActionType.USER_LOGIN_REQUEST:
     case UserActionType.USER_REGISTER_REQUEST:
-    case UserActionType.USER_DETAILS_REQUEST:
     case UserActionType.USER_UPDATE_PROFILE_REQUEST:
       return {
         ...state,
@@ -14,7 +13,6 @@ const userReducer = (state = INITIAL_STATE, action) => {
       };
     case UserActionType.USER_LOGIN_SUCCESS:
     case UserActionType.USER_REGISTER_SUCCESS:
-    case UserActionType.USER_DETAILS_SUCCESS:
       return {
         loading: false,
         userInfo: action.payload,
@@ -27,7 +25,6 @@ const userReducer = (state = INITIAL_STATE, action) => {
       };
     case UserActionType.USER_LOGIN_FAIL:
     case UserActionType.USER_REGISTER_FAIL:
-    case UserActionType.USER_DETAILS_FAIL:
     case UserActionType.USER_UPDATE_PROFILE_FAIL:
       return {
         loading: false,
@@ -35,6 +32,28 @@ const userReducer = (state = INITIAL_STATE, action) => {
       };
     case UserActionType.USER_LOGOUT:
       return {};
+    default:
+      return state;
+  }
+};
+
+export const userDetailsReducer = (state = { user: {} }, action) => {
+  switch (action.type) {
+    case UserActionType.USER_DETAILS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case UserActionType.USER_DETAILS_SUCCESS:
+      return {
+        loading: false,
+        user: action.payload,
+      };
+    case UserActionType.USER_DETAILS_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
     default:
       return state;
   }
