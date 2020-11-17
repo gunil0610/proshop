@@ -6,9 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import FormContainer from "../components/FormContainer";
-import { getUserDetails } from "../redux/user/user.actions";
+import { getUserDetails, updateUser } from "../redux/user/user.actions";
+import UserActionTypes from "../redux/user/user.types";
 
-const UserEditScreen = ({ match, location }) => {
+const UserEditScreen = ({ match, history, location }) => {
   const userId = match.params.id;
 
   const [name, setName] = useState("");
@@ -20,18 +21,31 @@ const UserEditScreen = ({ match, location }) => {
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
 
+  const userUpdate = useSelector((state) => state.userUpdate);
+  const {
+    loading: loadingUpdate,
+    error: errorUpdate,
+    success: successUpdate,
+  } = userUpdate;
+
   useEffect(() => {
-    if (!user.name || user._id !== userId) {
-      dispatch(getUserDetails(userId));
+    if (successUpdate) {
+      dispatch({ type: UserActionTypes.USER_UPDATE_RESET });
+      history.push("/admin/userlist");
     } else {
-      setName(user.name);
-      setEmail(user.email);
-      setIsAdmin(user.isAdmin);
+      if (!user.name || user._id !== userId) {
+        dispatch(getUserDetails(userId));
+      } else {
+        setName(user.name);
+        setEmail(user.email);
+        setIsAdmin(user.isAdmin);
+      }
     }
-  }, [user, dispatch, userId]);
+  }, [user, dispatch, userId, history, successUpdate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
+    dispatch(updateUser({ _id: userId, name, email, isAdmin }));
   };
 
   return (
@@ -41,6 +55,8 @@ const UserEditScreen = ({ match, location }) => {
       </Link>
       <FormContainer>
         <h1>Edit User</h1>
+        {loadingUpdate && <Loader />}
+        {errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
         {loading ? (
           <Loader />
         ) : error ? (
