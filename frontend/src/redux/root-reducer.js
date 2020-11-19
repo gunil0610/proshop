@@ -14,11 +14,13 @@ import userReducer, {
   userDeleteReducer,
   userUpdateReducer,
 } from "./user/user.reducer";
-import orderReducer, {
+import {
+  orderCreateReducer,
   orderDetailsReducer,
   orderPayReducer,
   orderListMyReducer,
   orderListReducer,
+  orderDeliverReducer,
 } from "./order/order.reducer";
 
 const rootReducer = combineReducers({
@@ -33,11 +35,12 @@ const rootReducer = combineReducers({
   userList: userListReducer,
   userDelete: userDeleteReducer,
   userUpdate: userUpdateReducer,
-  order: orderReducer,
+  order: orderCreateReducer,
   orderDetails: orderDetailsReducer,
   orderPay: orderPayReducer,
   orderListMy: orderListMyReducer,
   orderList: orderListReducer,
+  orderDeliver: orderDeliverReducer,
 });
 
 export default rootReducer;

@@ -4,7 +4,7 @@ const INITIAL_STATE = {
   loading: true,
 };
 
-const orderReducer = (state = INITIAL_STATE, action) => {
+export const orderCreateReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case OrderActionTypes.ORDER_CREATE_REQUEST:
       return { ...state, loading: true };
@@ -73,4 +73,17 @@ export const orderListReducer = (state = { orders: [] }, action) => {
   }
 };
 
-export default orderReducer;
+export const orderDeliverReducer = (state = {}, action) => {
+  switch (action.type) {
+    case OrderActionTypes.ORDER_DELIVER_REQUEST:
+      return { loading: true };
+    case OrderActionTypes.ORDER_DELIVER_SUCCESS:
+      return { loading: false, success: true };
+    case OrderActionTypes.ORDER_DELIVER_FAIL:
+      return { loading: false, error: action.payload };
+    case OrderActionTypes.ORDER_DELIVER_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
