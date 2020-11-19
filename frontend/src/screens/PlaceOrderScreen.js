@@ -20,10 +20,11 @@ const PlaceOrderScreen = ({ history }) => {
   );
   cart.shippingPrice = cart.itemsPrice > 100 ? 0 : 10;
   cart.taxPrice = Number(0.15 * cart.itemsPrice).toFixed(2);
-  cart.totalPrice =
+  cart.totalPrice = (
     Number(cart.itemsPrice) +
     Number(cart.shippingPrice) +
-    Number(cart.taxPrice);
+    Number(cart.taxPrice)
+  ).toFixed(2);
 
   const orderCreate = useSelector((state) => state.order);
   const { order, success, error } = orderCreate;
