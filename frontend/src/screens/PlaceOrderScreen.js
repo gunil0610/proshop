@@ -7,6 +7,7 @@ import Message from "../components/Message";
 import CheckoutSteps from "../components/CheckoutSteps";
 
 import { createOrder } from "../redux/order/order.actions";
+import OrderActionTypes from "../redux/order/order.types";
 
 const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ const PlaceOrderScreen = ({ history }) => {
   useEffect(() => {
     if (success) {
       history.push(`/order/${order._id}`);
+      dispatch({ type: OrderActionTypes.ORDER_CREATE_RESET });
     }
     // eslint-disable-next-line
   }, [history, success]);

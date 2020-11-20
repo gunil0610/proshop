@@ -1,10 +1,6 @@
 import OrderActionTypes from "./order.types";
 
-const INITIAL_STATE = {
-  loading: true,
-};
-
-export const orderCreateReducer = (state = INITIAL_STATE, action) => {
+export const orderCreateReducer = (state = {}, action) => {
   switch (action.type) {
     case OrderActionTypes.ORDER_CREATE_REQUEST:
       return { ...state, loading: true };
@@ -12,12 +8,14 @@ export const orderCreateReducer = (state = INITIAL_STATE, action) => {
       return { loading: false, success: true, order: action.payload };
     case OrderActionTypes.ORDER_CREATE_FAIL:
       return { loading: false, error: action.payload };
+    case OrderActionTypes.ORDER_CREATE_RESET:
+      return {};
     default:
       return state;
   }
 };
 
-export const orderDetailsReducer = (state = INITIAL_STATE, action) => {
+export const orderDetailsReducer = (state = { loading: true }, action) => {
   switch (action.type) {
     case OrderActionTypes.ORDER_DETAILS_REQUEST:
       return { ...state, loading: true };
@@ -30,7 +28,7 @@ export const orderDetailsReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
-export const orderPayReducer = (state = INITIAL_STATE, action) => {
+export const orderPayReducer = (state = {}, action) => {
   switch (action.type) {
     case OrderActionTypes.ORDER_PAY_REQUEST:
       return { loading: true };

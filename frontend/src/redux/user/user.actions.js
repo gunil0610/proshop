@@ -40,9 +40,13 @@ export const login = (email, password) => async (dispatch) => {
 
 export const logout = () => (dispatch) => {
   localStorage.removeItem("userInfo");
+  localStorage.removeItem("cartItems");
+  localStorage.removeItem("shippingAddress");
+  localStorage.removeItem("paymentMethod");
   dispatch({ type: UserActionTypes.USER_LOGOUT });
   dispatch({ type: UserActionTypes.USER_LIST_RESET });
   dispatch({ type: OrderActionTypes.ORDER_LIST_MY_RESET });
+  document.location.href = "/login";
 };
 
 export const register = (name, email, password) => async (dispatch) => {
