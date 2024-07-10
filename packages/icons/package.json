@@ -1,0 +1,31 @@
+{
+  "name": "@repo/icons",
+  "version": "0.1.0",
+  "license": "MIT",
+  "scripts": {
+    "build:icons": "node ./build-icons/cli.mjs --output=./src --templateSrc=./scripts/exportTemplate.mjs --renderUniqueKey --withAliases --withDynamicImports"
+  },
+  "main": "./src/icons/index.ts",
+  "devDependencies": {
+    "@shared/eslint-config": "workspace:*",
+    "@shared/tailwind-config": "workspace:*",
+    "@shared/ts-config": "workspace:*",
+    "@types/react": "^18.2.73",
+    "@types/react-dom": "^18.2.23",
+    "eslint": "^8.57.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwindcss": "^3.4.3",
+    "typescript": "5.4.3"
+  },
+  "dependencies": {
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
+    "tailwind-merge": "^2.2.2",
+    "minimist": "^1.2.7",
+    "node-fetch": "^3.2.10",
+    "prettier": "2.7.1",
+    "svgo": "^3.0.0",
+    "svgson": "^5.2.1"
+  }
+}
